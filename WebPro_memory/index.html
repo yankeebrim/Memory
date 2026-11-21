@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAEMON LIFE Memory</title>
+
+  <!-- fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- title -->
+  <header>
+    <h1>DAEMON LIFE</h1>
+  </header>
+
+  <main>
+    <!-- new game button. onclick runs restart() in main.js: reshuffle and deal again -->
+    <button id="new-game" onclick="restart()">New Game</button>
+
+    <!-- the board. empty here, main.js drops the cards in -->
+    <div id="board"></div>
+  </main>
+
+  <!-- start it -->
+  <script src="js/main.js"></script>
+</body>
+</html>

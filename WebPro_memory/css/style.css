@@ -1,0 +1,114 @@
+/* DAEMON LIFE memory game */
+/* most of this built using similar style to a trading card game, i am building. */
+
+/* colors + font. set em once here, use em everywhere */
+:root {
+  --bg: #050708;
+  --cyan: #5EF2F0;
+  --text: #cfeeee;
+  --font: "VT323", ui-monospace, Menlo, Consolas, monospace;
+}
+
+/* the page. dark, light text, everything centered */
+body {
+  margin: 0;
+  padding: 24px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 24px;
+  text-align: center;
+}
+
+/* title. big, cyan, glows */
+h1 {
+  color: var(--cyan);
+  font-size: 56px;
+  font-weight: normal;
+  margin: 0 0 8px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 12px var(--cyan);
+}
+
+/* new game button. cyan box, dark text */
+#new-game {
+  font-family: var(--font);
+  font-size: 22px;
+  color: var(--bg);
+  background: var(--cyan);
+  border: none;
+  padding: 6px 20px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* board. 4 across, 3 down = 12 cards, sits in the middle */
+#board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* one card. shaped like a real TCG card */
+/* perspective is what makes the flip look 3d */
+.card {
+  aspect-ratio: 5 / 7;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  perspective: 600px;
+}
+
+/* the part that actually turns. half a second */
+.card-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* js adds "flipped" = card turns over */
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* both sides stacked on top of each other. */
+/* backface-visibility hides whichever side is facing away */
+.front,
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 2px solid var(--cyan);
+  backface-visibility: hidden;
+}
+
+/* back = what you see face down. the real TCG card back */
+.back {
+  background-color: #0a1a1f;
+  background-image: url("../img/back.webp");
+  background-position: center center;
+  background-size: cover;
+}
+
+/* front = the picture. starts turned away so the back shows first */
+.front {
+  background: #0a1a1f;
+  transform: rotateY(180deg);
+}
+
+/* picture fills the card, no stretching (faces are wider than cards) */
+.front img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
